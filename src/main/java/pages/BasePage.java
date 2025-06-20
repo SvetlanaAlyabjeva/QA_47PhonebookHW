@@ -40,8 +40,8 @@ public abstract class BasePage {
             case ABOUT -> {
                 return (T) new AboutPage(driver);
             }
-            case SIGNOUT -> {
-                return (T) new SignOutPage(driver);
+            case SIGN_OUT -> {
+                return (T) new LoginPage(driver);
             }
             default -> throw new IllegalArgumentException("Invalid parameter headerMenuItem");
         }

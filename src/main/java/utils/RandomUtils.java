@@ -20,6 +20,16 @@ public class RandomUtils {
             }
     return new String(randomString);
     }
+    public static String generatePhone(int length){
+        String characters = "0123456789";
+    char[] randomString = new char[length];
+    int index = 0;
+    for (int i = 0; i < length; i++){
+        index = random.nextInt(characters.length());
+        randomString[i] = characters.charAt(index);
+            }
+    return new String(randomString);
+    }
 
     public static String generateEmail(int length){
         String[] domains = {"@mail.com", "@yahoo.com", "@gmail.com", "@example.com"};

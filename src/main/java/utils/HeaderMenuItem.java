@@ -5,8 +5,8 @@ public enum HeaderMenuItem {
     ADD ("//a[text()='ADD']"),
     CONTACTS("//a[text()='CONTACTS']"),
     ABOUT("//a[text()='ABOUT']"),
-    HOME("//a[text()='ABOUT']"),
-    SIGNOUT("//a[text()='ABOUT']");
+    HOME("//a[text()='HOME']"),
+    SIGN_OUT("//button[text()='Sign Out']");
 
         private final String locator;
     HeaderMenuItem(String locator) {
