@@ -37,4 +37,12 @@ for (WebElement element: contactsList){
     }
 return false;
     }
+
+    public String getPhoneFromList() {
+        if(!contactsList.isEmpty()){
+            System.out.println(contactsList.get(0).getText().split("\n")[1]);
+            return contactsList.get(0).getText().split("\n")[1];}
+        System.out.println("contact list is empty");
+        return null;
+    }
 }

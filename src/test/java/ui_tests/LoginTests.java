@@ -13,6 +13,8 @@ import pages.HomePage;
 import pages.LoginPage;
 import utils.RandomUtils.*;
 
+import java.lang.reflect.Method;
+
 import static utils.RandomUtils.generateEmail;
 
 public class LoginTests extends ApplicationManager {
@@ -31,7 +33,8 @@ public class LoginTests extends ApplicationManager {
 
     @Test
 
-    public void loginPositiveTests() {
+    public void loginPositiveTests(Method method) {
+        logger.info("start method  " + method.getName());
         //User user = new User("svetlana.alyabjeva@gmail.com", "Sveta08@");
         HomePage homePage = new HomePage(getDriver());
         homePage.clickBtnLoginHeader();

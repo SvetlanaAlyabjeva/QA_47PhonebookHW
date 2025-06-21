@@ -1,6 +1,7 @@
 package pages;
 
 import dto.User;
+import dto.UserLombok;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -38,17 +39,17 @@ public class LoginPage extends BasePage {
     WebElement messageNoContacts;
 
     @FindBy(xpath = "//button[text() = 'Sign Out']")
-            WebElement btnSignOutHeader;
+    WebElement btnSignOutHeader;
 
-    public void logOut(){
+    public void logOut() {
         btnSignOutHeader.click();
     }
-
 
 
     public void typeLoginForm(String email, String password) {
         inputEmail.sendKeys(email);
         inputPassword.sendKeys(password);
+        logger.info("click btn Login "+ btnLoginForm.getTagName());
         btnLoginForm.click();
     }
 
@@ -68,10 +69,10 @@ public class LoginPage extends BasePage {
     public boolean isErrorMessagePresent(String message) {
         return isTextInElementPresent(errorMessageLogin, message);
     }
+
     public boolean isNoContactsMessagePresent(String message) {
         return isTextInElementPresent(messageNoContacts, message);
     }
-
 
 
     public void typeRegistrationForm(User user) {

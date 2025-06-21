@@ -5,12 +5,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import utils.HeaderMenuItem;
 
 import java.time.Duration;
 
 public abstract class BasePage {
     static WebDriver driver;
+
+    Logger logger = LoggerFactory.getLogger(BasePage.class);
 
     public static void setDriver(WebDriver wd) {
         driver = wd;
@@ -59,6 +63,12 @@ public abstract class BasePage {
     public boolean isTextInElementPresent(WebElement element, String text) {
         return element.getText().contains(text);
     }
+public boolean validateURL(String str){
+       return new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.urlContains(str));
 
+}public boolean isURLNotContains(String str){
+        pause(5);
+       return new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.not(ExpectedConditions.urlContains(str)));
+}
 
 }
