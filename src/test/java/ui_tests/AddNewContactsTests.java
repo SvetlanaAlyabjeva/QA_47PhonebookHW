@@ -60,4 +60,49 @@ addPage.typeAddNewContactForm(contact);
 Assert.assertTrue(contactsPage.validateContactNamePhone(contact.getName(), contact.getPhone()));
 
     }
+    @Test
+    public void addNewContactNegativeTest_NoName(){
+        Contact contact = Contact.builder()
+                .name("")
+                .lastName(generateString(10))
+                .phone("11215255622")
+                .email(generateEmail(10))
+                .address("Haifa" +generateString(10))
+                .description("desc"+ generateString(15))
+                .build();
+        addPage.typeAddNewContactForm(contact);
+        int sizeAfterAdd = contactsPage.getContactsListSize();
+        System.out.println(sizeBeforeAdd+"X"+sizeAfterAdd);
+        Assert.assertNotEquals(sizeBeforeAdd+1, sizeAfterAdd);
+    }
+
+    @Test
+    public void addNewContactNegativeTest_PhoneNotValid(){
+        Contact contact = Contact.builder()
+                .name(generateString(10))
+                .lastName(generateString(10))
+                .phone(generateString(12))
+                .email(generateEmail(10))
+                .address("Haifa" +generateString(10))
+                .description("desc"+ generateString(15))
+                .build();
+        addPage.typeAddNewContactForm(contact);
+        Assert.assertTrue(loginPage.closeAlertReturnText().contains("Phone not valid: Phone number must contain only digits! And length min 10, max 15!"));
+    }
+
+    @Test
+    public void addNewContactNegativeTest_MailNotValid(){
+        Contact contact = Contact.builder()
+                .name(generateString(10))
+                .lastName(generateString(10))
+                .phone(generatePhone(12))
+                .email(generateString(10))
+                .address("Haifa" +generateString(10))
+                .description("desc"+ generateString(15))
+                .build();
+        addPage.typeAddNewContactForm(contact);
+        Assert.assertTrue(loginPage.closeAlertReturnText().contains(
+                "Email not valid: must be a well-formed email address"));
+    }
+
 }
