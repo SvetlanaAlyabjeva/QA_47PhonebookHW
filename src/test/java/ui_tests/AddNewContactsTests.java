@@ -4,15 +4,18 @@ import dto.Contact;
 import manager.ApplicationManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.AddPage;
 import pages.ContactsPage;
 import pages.HomePage;
 import pages.LoginPage;
 import utils.HeaderMenuItem;
+import utils.TestNGListener;
+
 import static pages.BasePage.*;
 import static utils.RandomUtils.*;
-
+@Listeners(TestNGListener.class)
 public class AddNewContactsTests extends ApplicationManager {
    HomePage homePage;
    LoginPage loginPage;
