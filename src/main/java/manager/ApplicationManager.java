@@ -24,7 +24,7 @@ public class ApplicationManager {
 
     @BeforeMethod
     public void setup(){
-        logger.info("start test>>>"+ LocalDate.now());
+       // logger.info("start test>>>"+ LocalDate.now());
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
@@ -32,10 +32,10 @@ public class ApplicationManager {
         driver = new EventFiringDecorator<>(webDriverListener).decorate(driver);
     }
 
-    @AfterMethod
-    public void teardown(){
-        logger.info("stop test");
-       // if(driver != null)
-         //   driver.quit();
+    @AfterMethod(enabled = false)
+    public void tearDown(){
+       // logger.info("stop test");
+     if(driver != null)
+        driver.quit();
     }
 }
