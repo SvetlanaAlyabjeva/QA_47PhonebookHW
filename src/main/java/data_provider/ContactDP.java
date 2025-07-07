@@ -22,8 +22,8 @@ public class ContactDP {
                 list.add(Contact.builder()
                         .name(splitArray[0])
                         .lastName(splitArray[1])
-                        .email(splitArray[2])
                         .phone(splitArray[3])
+                        .email(splitArray[2])
                         .address(splitArray[4])
                         .description(splitArray[5])
                         .build());

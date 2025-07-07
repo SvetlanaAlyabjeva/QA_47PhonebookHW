@@ -8,6 +8,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
+import utils.RetryAnalyzer;
 import utils.TestNGListener;
 
 import static utils.RandomUtils.generateEmail;
@@ -24,7 +25,7 @@ public class RegistrationTests extends ApplicationManager {
         this.loginPage = new LoginPage(getDriver());
     }
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void registrationPositiveTest() {
         User user = new User(generateEmail(10), "Password1213!");
         loginPage.typeRegistrationForm(user);

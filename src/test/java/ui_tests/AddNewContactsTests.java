@@ -16,6 +16,7 @@ import utils.TestNGListener;
 
 import static pages.BasePage.*;
 import static utils.RandomUtils.*;
+import static utils.PropertiesReader.*;
 
 @Listeners(TestNGListener.class)
 public class AddNewContactsTests extends ApplicationManager {
@@ -30,7 +31,7 @@ public class AddNewContactsTests extends ApplicationManager {
     public void login() {
         homePage = new HomePage(getDriver());
         loginPage = clickButtonHeader(HeaderMenuItem.LOGIN);
-        loginPage.typeLoginForm("svetlana.alyabjeva@gmail.com", "Sveta08@");
+        loginPage.typeLoginForm(getProperty("login.properties", "email"), getProperty("login.properties", "password"));
         contactsPage = new ContactsPage(getDriver());
         sizeBeforeAdd = contactsPage.getContactsListSize();
         existPhone = contactsPage.getPhoneFromList();

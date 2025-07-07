@@ -19,6 +19,9 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.28'
 
     implementation 'ch.qos.logback:logback-classic:1.5.18'
+
+    implementation 'io.rest-assured:rest-assured:4.5.1'
+    implementation 'com.google.code.gson:gson:2.8.6'
 }
 
 test {
