@@ -28,14 +28,26 @@ tokenDto = response.body().as(TokenDto.class);
         System.out.println("smth sent wrong>>>" + response.getStatusCode());
     }
 }
-protected Response addNewContactRequest(Contact contact, TokenDto tokenDto){
-    return  given()
+protected Response addNewContactRequest(Contact contact, TokenDto tokenDto) {
+    return given()
             .body(contact)
             .baseUri(getProperty("login.properties", "baseUri"))
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
             .header("Authorization", tokenDto.getToken())
             .post(ADD_NEW_CONTACT_URL)
+            .thenReturn()
+            ;
+}
+    protected Response updateContactRequest(Contact contact, TokenDto tokenDto){
+    return  given()
+            .log().all() //body, headers, cookies, status
+            .body(contact)
+            .baseUri(getProperty("login.properties", "baseUri"))
+            .contentType(ContentType.JSON)
+            .accept(ContentType.JSON)
+            .header("Authorization", tokenDto.getToken())
+            .put(ADD_NEW_CONTACT_URL)
             .thenReturn()
             ;
 }
@@ -48,4 +60,16 @@ public Response getAllUserContacts(){
             .thenReturn()
             ;
 }
+protected Response deleteContactById(Contact contact, TokenDto tokenDto){
+    return given()
+            .log().all()
+            .baseUri(getProperty("login.properties", "baseUri"))
+            .accept(ContentType.JSON)
+            .header("Authorization", tokenDto.getToken())
+            .delete(ADD_NEW_CONTACT_URL+"/"+contact.getId())
+            .thenReturn()
+            ;
+}
+
+
 }
