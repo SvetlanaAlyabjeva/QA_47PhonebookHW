@@ -27,7 +27,7 @@ public class AddNewContactsTests extends ApplicationManager {
     int sizeBeforeAdd;
     String existPhone;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void login() {
         homePage = new HomePage(getDriver());
         loginPage = clickButtonHeader(HeaderMenuItem.LOGIN);
@@ -38,7 +38,7 @@ public class AddNewContactsTests extends ApplicationManager {
         addPage = clickButtonHeader((HeaderMenuItem.ADD));
     }
 
-    @Test
+    @Test(groups = "smoke")
     public void addNewContactPositiveTest() {
         Contact contact = Contact.builder()
                 .name(generateString(5))

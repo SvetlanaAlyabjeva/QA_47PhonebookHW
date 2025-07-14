@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class GetUserContactsTests extends ContactController {
 
-    @Test
+    @Test(groups = "smoke")
     public void getAllUserContactsPositiveTest(){
         Response response = getAllUserContacts();
         System.out.println(response.getStatusLine());

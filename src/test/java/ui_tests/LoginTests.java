@@ -33,7 +33,7 @@ public class LoginTests extends ApplicationManager {
         contactsPage = new ContactsPage(getDriver());
     }
 
-    @Test
+    @Test(groups = "smoke")
 
     public void loginPositiveTests(Method method) {
         logger.info("start method  " + method.getName());

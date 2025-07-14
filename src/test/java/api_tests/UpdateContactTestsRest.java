@@ -15,7 +15,7 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 public class UpdateContactTestsRest extends ContactController {
     Contact contact;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void CreateContact() {
         contact = Contact.builder()
                 .name(generateString(5))
@@ -36,7 +36,7 @@ public class UpdateContactTestsRest extends ContactController {
         contact.setId(responseMessageDto.getMessage().split("ID: ")[1]);}
     }
 
-    @Test
+    @Test(groups = "smoke")
     public void updateContactPositiveTest() {
         System.out.println(contact.toString());
         contact.setName("New name");

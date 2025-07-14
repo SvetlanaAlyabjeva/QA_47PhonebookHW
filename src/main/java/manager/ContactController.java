@@ -17,7 +17,7 @@ public class ContactController implements BaseAPI {
 
     protected TokenDto tokenDto;
 
-@BeforeSuite
+@BeforeSuite(alwaysRun = true)
     public void login(){
     User user = new User(getProperty("login.properties", "email"), getProperty("login.properties", "password"));
     Response response = new AuthenticationController().requestRegLogin(user, LOGIN_URL);

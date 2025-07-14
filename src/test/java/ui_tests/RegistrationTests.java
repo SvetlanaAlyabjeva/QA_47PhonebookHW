@@ -18,14 +18,14 @@ public class RegistrationTests extends ApplicationManager {
     HomePage homePage;
     LoginPage loginPage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void goToRegistrationPage() {
         HomePage homePage = new HomePage(getDriver());
         homePage.clickBtnLoginHeader();
         this.loginPage = new LoginPage(getDriver());
     }
 
-    @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class, groups = "smoke")
     public void registrationPositiveTest() {
         User user = new User(generateEmail(10), "Password1213!");
         loginPage.typeRegistrationForm(user);
