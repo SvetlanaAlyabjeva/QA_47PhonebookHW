@@ -16,7 +16,7 @@ import static utils.RandomUtils.generateString;
 public class AddNewContactTestsRest extends ContactController {
     SoftAssert softAssert = new SoftAssert();
 
-    @Test(groups = "smoke")
+    @Test(groups = {"smoke", "contact"})
     public void addNewContactPositiveTest() {
         Contact contact = Contact.builder()
                 .name(generateString(5))

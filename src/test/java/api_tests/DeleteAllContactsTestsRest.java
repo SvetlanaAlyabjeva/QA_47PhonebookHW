@@ -11,13 +11,13 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static utils.RandomUtils.generateEmail;
 import static utils.RandomUtils.generateString;
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
-public class UpdateContactTestsRest extends ContactController {
-    SoftAssert softAssert = new SoftAssert();
+public class DeleteAllContactsTestsRest extends ContactController {
     Contact contact;
+    SoftAssert softAssert = new SoftAssert();
 
     @BeforeClass(alwaysRun = true)
     public void CreateContact() {
@@ -36,34 +36,25 @@ public class UpdateContactTestsRest extends ContactController {
             System.out.println("Contact is not created");
         else {
             responseMessageDto = response.body().as(ResponseMessageDto.class);
-
             contact.setId(responseMessageDto.getMessage().split("ID: ")[1]);
         }
     }
 
-    @Test(groups = {"smoke", "contact"})
-    public void updateContactPositiveTest() {
-        System.out.println(contact.toString());
-        contact.setName("New name");
-        Response response = updateContactRequest(contact, tokenDto);
-        System.out.println(response.getStatusLine());
+    @Test()
+    public void deleteAllContactsPositiveTest() {
+        Response response = deleteAllContacts(tokenDto);
         response
                 .then()
                 .log().all()//ifValidationFails()
                 .statusCode(200)
                 .body(matchesJsonSchemaInClasspath("ResponseMessageDtoSchema.json"));
         ResponseMessageDto responseMessageDto = response.body().as(ResponseMessageDto.class);
-        Assert.assertTrue(responseMessageDto.getMessage().contains("Contact was updated"));
+        Assert.assertTrue(responseMessageDto.getMessage().contains("All contacts was deleted!"));
     }
 
-    @Test(groups = "smoke")
-    public void updateContactNegativeTest_401_WrongToken() {
-        System.out.println(contact.toString());
-        contact.setName("New name");
-        Response response = updateContactRequest(contact, TokenDto.builder()
-                .token("wrong")
-                .build());
-        System.out.println(response.getStatusLine());
+    @Test()
+    public void deleteAllContactsNegativeTest_401_WrongToken() {
+        Response response = deleteAllContacts(TokenDto.builder().token("Wrong").build());
         response
                 .then()
                 .log().all()
@@ -77,22 +68,4 @@ public class UpdateContactTestsRest extends ContactController {
         softAssert.assertAll();
     }
 
-    @Test(groups = "smoke")
-    public void updateContactNegativeTest_400_WrongFormat() {
-        System.out.println(contact.toString());
-        contact.setEmail("newMail.com");
-        Response response = updateContactRequest(contact, tokenDto);
-        System.out.println(response.getStatusLine());
-        response
-                .then()
-                .log().all()
-                .statusCode(400)
-                .body(matchesJsonSchemaInClasspath("ErrorMessageDtoSchema.json"));
-        ErrorMessageDto errorMessageDto = response.body().as(ErrorMessageDto.class);
-        System.out.println(errorMessageDto.toString());
-        softAssert.assertEquals(errorMessageDto.getStatus(), 400);
-        softAssert.assertTrue(errorMessageDto.getMessage().toString().contains("email=must be a well-formed email address"));
-        softAssert.assertTrue(errorMessageDto.getError().equals("Bad Request"));
-        softAssert.assertAll();
-    }
 }

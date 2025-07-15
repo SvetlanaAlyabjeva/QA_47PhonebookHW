@@ -2,6 +2,7 @@ package ui_tests;
 
 import dto.Contact;
 import dto.ContactsDto;
+import dto.TokenDto;
 import io.restassured.response.Response;
 import manager.ApplicationManager;
 import manager.ContactController;
@@ -46,7 +47,7 @@ public class AddNewContactTestWithApi extends ApplicationManager {
         BasePage.pause(10);
         ContactController contactController = new ContactController();
         contactController.login();
-        Response response = contactController.getAllUserContacts();
+        Response response = contactController.getAllUserContacts(TokenDto.builder().build());
         System.out.println(response.getStatusLine());
         ContactsDto contactsDto = new ContactsDto();
         if (response.getStatusCode() == 200) {

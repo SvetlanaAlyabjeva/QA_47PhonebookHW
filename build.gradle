@@ -30,13 +30,18 @@ test {
     useTestNG()
 }
 
-task smoke_tests(type: Test){
-    useTestNG(){
-       suites 'src/test/resources/smoke_tests.xml'
+task smoke_tests(type: Test) {
+    useTestNG() {
+        suites 'src/test/resources/smoke_tests.xml'
     }
 }
-task smoke_tests_api(type: Test){
-    useTestNG(){
-       suites 'src/test/resources/smoke_tests_api.xml'
+task smoke_tests_api(type: Test) {
+    useTestNG() {
+        suites 'src/test/resources/smoke_tests_api.xml'
+    }
+}
+task contact_tests(type: Test) {
+    useTestNG() {
+        suites 'src/test/resources/contact_tests.xml'
     }
 }
