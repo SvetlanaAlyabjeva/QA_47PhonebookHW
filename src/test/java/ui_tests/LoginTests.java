@@ -56,7 +56,7 @@ public class LoginTests extends ApplicationManager {
         Assert.assertTrue(contactsPage.isContactsPresent());
     }
 
-    @Test
+    @Test()
 
     public void loginNegativeTest_WrongPassword() {
         // User user = new User("svetlana.alyabjeva@gmail.com", "Sveta08@111");
@@ -68,7 +68,7 @@ public class LoginTests extends ApplicationManager {
         Assert.assertTrue(loginPage.isErrorMessagePresent("Login Failed with code 401"));
     }
 
-    @Test
+    @Test()
     public void loginNegativeTestLombok_WrongPassword() {
         UserLombok user = UserLombok.builder()
                 .username("svetlana.alyabjeva@gmail.com")

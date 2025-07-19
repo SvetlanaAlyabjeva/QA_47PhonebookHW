@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="parameter1" >
+    <parameter name="par1" value="10"/>
+    <parameter name="par2" value="234"/>
+    <parameter name="browser" value="edge"/>
+    <test name="par_test">
+        <classes>
+            <class name="experiments.ParametersTests"/>
+        </classes>
+    </test>
+</suite>

@@ -45,3 +45,38 @@ task contact_tests(type: Test) {
         suites 'src/test/resources/contact_tests.xml'
     }
 }
+
+task login_tests_browser(type: Test) {
+    useTestNG() {
+        if (project.hasProperty('browser')) {
+            systemProperty 'browser', "${browser}"
+        }
+        suites 'src/test/resources/login_tests.xml'
+    }
+}
+
+task different_tests(type: Test) {
+    useTestNG() {
+        if (project.hasProperty('browser')) {
+            systemProperty 'browser', "${browser}"
+        }
+        def suite = System.getProperty('suite', 'smoke_tests')
+        if (suite.equalsIgnoreCase('smoke_tests')) {
+            suites 'src/test/resources/smoke_tests.xml'
+        } else if(suite.equalsIgnoreCase('smoke_tests_api')){
+            suites 'src/test/resources/smoke_tests_api.xml'
+        } else if(suite.equalsIgnoreCase('login_tests_browser')){
+            suites 'src/test/resources/login_tests.xml'
+        } else{
+            suites 'src/test/resources/smoke_tests.xml'
+        }
+    }
+}
+
+
+task parameter(type: Test) {
+    useTestNG() {
+        suites 'src/test/resources/parameters/parameter1.xml'
+    }
+
+}

@@ -1,0 +1,15 @@
+cd C:\Projects\QA_47PhonebookHW       //from console !!!
+./gradlew clean smoke_tests
+./gradlew clean smoke_tests_api
+./gradlew clean login_tests_browser
+./gradlew clean -Pbrowser=edge login_tests_browser
+./gradlew clean -Pbrowser=firefox login_tests_browser
+
+./gradlew clean different_tests
+./gradlew clean -Dsuite=smoke_tests_api different_tests
+./gradlew clean -Dsuite=login_tests_browser different_tests
+
+./gradlew clean -Pbrowser=firefox -Dsuite=login_tests_browser different_tests
+./gradlew clean -Pbrowser=edge -Dsuite=smoke_tests different_tests
+./gradlew clean -Pbrowser=wrong -Dsuite=smoke_tests different_tests
+
